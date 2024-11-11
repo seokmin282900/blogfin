@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= post.title %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="post">
+            <h1><%= post.title %></h1>
+            <p>작성일: <%= post.createdAt.toDateString() %></p>
+            <div><%= post.content %></div>
+            <a href="/">홈으로 돌아가기</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 나만의 일기장. 모든 권리 보유.</p>
+    </footer>
+</body>
+</html>

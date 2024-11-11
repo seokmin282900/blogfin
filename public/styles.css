@@ -1,0 +1,217 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f7;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #333333;
+}
+
+a {
+    text-decoration: none;
+    color: #007aff;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0051a8;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: #ffffff;
+    color: #333333;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header a {
+    color: #007aff;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+header a:hover {
+    background: #e1e1e1;
+}
+
+.post {
+    background: #ffffff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post h2 {
+    margin: 0 0 10px;
+    font-size: 1.8em;
+}
+
+.post p {
+    color: #6c757d;
+}
+
+form {
+    display: inline;
+}
+
+form button {
+    background: #007aff; /* 애플 블루 */
+    color: white;
+    border: none;
+    padding: 12px 20px; /* 버튼 크기 조정 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em; /* 글꼴 크기 조정 */
+    transition: background 0.3s, transform 0.2s; /* 변환 효과 추가 */
+}
+
+form button:hover {
+    background: #0051a8; /* 어두운 블루 */
+    transform: scale(1.05); /* 버튼 크기 확대 효과 */
+    color: white; /* 글자색 유지 */
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #f5f5f7;
+    color: #333333;
+}
+
+.new-post-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.new-post-container h1 {
+    text-align: center;
+    color: #333333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.new-post-container label {
+    font-weight: bold;
+    color: #555;
+}
+
+.new-post-container input,
+.new-post-container textarea,
+.auth-container input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #007aff; /* 애플 블루 */
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.new-post-container input:focus,
+.new-post-container textarea:focus,
+.auth-container input:focus {
+    border-color: #0051a8; /* 어두운 블루 */
+    outline: none; /* 기본 아웃라인 제거 */
+}
+
+.new-post-container button {
+    background: #007aff;
+    color: white;
+    border: none;
+    padding: 12px 20px; /* 버튼 크기 조정 */
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background 0.3s, transform 0.2s; /* 변환 효과 추가 */
+    display: block;
+    margin: 20px auto; /* 중앙 정렬 */
+}
+
+.new-post-container button:hover {
+    background: #0051a8;
+    transform: scale(1.05); /* 버튼 크기 확대 효과 */
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #f5f5f7; /* 밝은 회색 */
+    color: #333333; /* 어두운 색상 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s; /* 변환 효과 추가 */
+}
+
+.back-button:hover {
+    background: #e1e1e1; /* 밝은 회색 */
+    transform: scale(1.05); /* 버튼 크기 확대 효과 */
+}
+
+.auth-buttons {
+    margin-top: 10px;
+}
+
+.auth-button {
+    color: #ffffff;
+    font-weight: bold;
+    background: #007aff; /* 애플 블루 */
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s; /* 변환 효과 추가 */
+}
+
+.auth-button:hover {
+    background: #0051a8; /* 어두운 블루 */
+    transform: scale(1.05); /* 버튼 크기 확대 효과 */
+}
+
+.error-message {
+    color: red; /* 에러 메시지 색상 */
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center; /* 중앙 정렬 */
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between; /* 수정 버튼과 삭제 버튼을 양쪽 끝으로 배치 */
+    align-items: center; /* 수직 정렬 */
+}
+
+.delete-button {
+    background: #ff4d4d; /* 삭제 버튼 색상 */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.delete-button:hover {
+    background: #ff1a1a; /* 삭제 버튼 호버 색상 */
+}

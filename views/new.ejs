@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>새 글 작성하기</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="new-post-container">
+            <h1>새 글 작성하기</h1>
+            <form action="/post/new" method="POST">
+                <div>
+                    <label for="title">제목:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div>
+                    <label for="content">내용:</label>
+                    <textarea id="content" name="content" required></textarea>
+                </div>
+                <button type="submit">글 작성하기</button>
+            </form>
+            <a href="/" class="back-button">뒤로가기</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 나만의 일기장. 모든 권리 보유.</p>
+    </footer>
+</body>
+</html>
