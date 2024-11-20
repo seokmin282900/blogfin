@@ -5,11 +5,13 @@ const path = require('path');
 const methodOverride = require('method-override');
 const User = require('./models/user'); // 사용자 모델 추가
 const session = require('express-session'); // 세션 관리 추가
+const MongoStore = require('connect-mongo'); // MongoDB 세션 저장소
+const bcrypt = require('bcrypt');
 
 const app = express();
 
 // Connect to MongoDB (make sure you have MongoDB installed and running)
-mongoose.connect('mongodb+srv://cco10004:ok282900@cluster0.sqiki.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://cco10004:ok282900@cluster0.sqiki.mongodb.net/');
 
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
@@ -24,7 +26,11 @@ app.use(methodOverride('_method'));
 app.use(session({
   secret: 'your_secret_key',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb+srv://cco10004:ok282900@cluster0.sqiki.mongodb.net/',
+    collectionName: 'sessions'
+  })
 }));
 
 // Define the Blog Post model
@@ -76,13 +82,19 @@ app.put('/post/:id', async (req, res) => {
 
 // 회원가입 페이지
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', { session: req.session });
 });
 
 // 회원가입 처리
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
-  const user = new User({ username, password });
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    req.session.errorMessage = "이미 사용 중인 사용자 이름입니다.";
+    return res.redirect('/register');
+  }
+  const hashedPassword = await bcrypt.hash(password, 10); // 비밀번호 해싱
+  const user = new User({ username, password: hashedPassword });
   await user.save();
   res.redirect('/login');
 });
@@ -95,13 +107,13 @@ app.get('/login', (req, res) => {
 // 로그인 처리
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username, password });
-  if (user) {
-    req.session.userId = user._id; // 세션에 사용자 ID 저장
+  const user = await User.findOne({ username });
+  if (user && await bcrypt.compare(password, user.password)) { // 해싱된 비밀번호 비교
+    req.session.userId = user._id;
     res.redirect('/');
   } else {
-    req.session.errorMessage = "아이디나 비밀번호를 다시 확인해 주세요."; // 에러 메시지 저장
-    res.redirect('/login'); // 로그인 실패 시
+    req.session.errorMessage = "아이디나 비밀번호를 다시 확인해 주세요.";
+    res.redirect('/login');
   }
 });
 
